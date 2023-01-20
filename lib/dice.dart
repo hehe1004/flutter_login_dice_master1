@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:fluttertoast/fluttertoast.dart';
 
 
 class Dice extends StatefulWidget {
@@ -45,29 +46,41 @@ class _DiceState extends State<Dice> {
             SizedBox(
               height: 60.0,
             ),
-            ButtonTheme(
-              minWidth: 100.0,
-              height: 60.0,
-              child: ElevatedButton(
+            //버튼테마 더이상 사용안함
+            // ButtonTheme(
+            //   minWidth: 100.0,
+            //   height: 60.0,
+              ElevatedButton(
                 onPressed: () {
                   setState(() {
+                    print('실행0');
                     leftDice = Random().nextInt(6)+1;
                     rightDice = Random().nextInt(6)+1;
-
+                    print('실행');
                   });
-
+                  showToast("left dice :{$leftDice}, Right dice: {$rightDice}");
                 },
                 style: ElevatedButton.styleFrom(
+                  minimumSize: Size(80.0,50.0),
                     backgroundColor: Colors.orangeAccent),
                 child: Icon(
                   Icons.play_arrow,
                   color: Colors.white,
                 ),
               ),
-            )
+            // )
           ],
         ),
       ),
     );
   }
+}
+
+void showToast(String message){
+  Fluttertoast.showToast(msg: message,
+  backgroundColor: Colors.white,
+  textColor: Colors.green,
+  toastLength: Toast.LENGTH_SHORT,
+  gravity: ToastGravity.BOTTOM);
+
 }
